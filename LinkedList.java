@@ -1,4 +1,4 @@
-package com.nevz.Linkedlist;
+package com.nevzington.LinkedList;
 
 public class LinkedList {
 	// reference to the head node.
@@ -52,7 +52,7 @@ public class LinkedList {
 		if(index <= 0)
 			return null;
 			
-		Node current = head.getNext();
+		Node current = head;
 		for(int i = 1; i < index; i++){
 			if(current.getNext() == null)
 				return null;
@@ -68,15 +68,23 @@ public class LinkedList {
 		if(index < 1 || index > size())
 			return false;
 			
+		Node prev = head;
 		Node current = head;
 		for(int i = 1; i < index; i++){
 			if(current.getNext() == null)
 				return false;
 				
+			prev = current;
 			current = current.getNext();
 		}
 		
-		current.setNext(current.getNext().getNext());
+		if(current == head){
+			head = current.getNext();
+			return true;
+		}
+		
+		//current.setNext(current.getNext().getNext());
+		prev.setNext(current.getNext());
 		listCount--; // decrement the number of elements variable
 		return true;
 	}
@@ -112,22 +120,26 @@ public class LinkedList {
 			next = null;
 			data = _data;
 		}
-			
+		
+		/*
 		// another Node constructor if we want to
 		// specify the node to point to.
 		public Node(Object _data, Node _next){
 			next = _next;
 			data = _data;
 		}
+		*/
 			
 		// these methods should be self-explanatory
 		public Object getData(){
 			return data;
 		}
-			
+		
+		/*
 		public void setData(Object _data){
 			data = _data;
 		}
+		*/
 			
 		public Node getNext(){
 			return next;
