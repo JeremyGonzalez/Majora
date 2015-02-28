@@ -31,7 +31,7 @@ public class LinkedList {
 	// post: inserts the specified element at the specified position in this list.
 	public void add(Object data, int index){
 		Node temp = new Node(data);
-		Node current = head;
+		Node current = head.getNext();
 		// crawl to the requested index or the last element in the list,
 		// whichever comes first
 		for(int i = 1; i < index && current.getNext() != null; i++){
@@ -52,7 +52,7 @@ public class LinkedList {
 		if(index <= 0)
 			return null;
 			
-		Node current = head;
+		Node current = head.getNext();
 		for(int i = 1; i < index; i++){
 			if(current.getNext() == null)
 				return null;
@@ -69,7 +69,7 @@ public class LinkedList {
 			return false;
 			
 		Node prev = head;
-		Node current = head;
+		Node current = head.getNext();
 		for(int i = 1; i < index; i++){
 			if(current.getNext() == null)
 				return false;
@@ -86,6 +86,19 @@ public class LinkedList {
 		//current.setNext(current.getNext().getNext());
 		prev.setNext(current.getNext());
 		listCount--; // decrement the number of elements variable
+		return true;
+	}
+	
+	public boolean setData(Object data, int index){
+		if(index <= 0)
+			return false;
+			
+		Node current = head.getNext();
+		for(int i = 1; i < index && current.getNext() != null; i++){
+			current = current.getNext();
+		}
+		
+		current.setData(data);
 		return true;
 	}
 		
@@ -135,12 +148,10 @@ public class LinkedList {
 			return data;
 		}
 		
-		/*
 		public void setData(Object _data){
 			data = _data;
 		}
-		*/
-			
+					
 		public Node getNext(){
 			return next;
 		}
