@@ -2,28 +2,25 @@ package com.nevzingtonavenue.rpn_calc;
 
 public class rpn {
 	
+	private int opcounter;
 	private int counter; // counter to determine what index within the stack we currently are.
 	private int[] stk0;
 	private char[] stk1;
 	
 	private void pushop(char op){
-		stk1[counter] = op;
-		counter++;
+		stk1[++opcounter] = op;
 	}
 	
 	private void push(int val){
-		stk0[counter] = val;
-		counter++;
+		stk0[++counter] = val;
 	}
 	
 	private int pop(){
-		counter--;
-		return stk0[counter+1];
+		return stk0[counter--];
 	}
 	
 	private char popop(){
-		counter--;
-		return stk1[counter+1];
+		return stk1[opcounter--];
 	}
 	
 	public void operation(String a){
@@ -36,7 +33,7 @@ public class rpn {
 			}
 		}
 		
-		for(int x = counter; x > 0; x--){
+		for(int x = opcounter; x >= 0; x--){
 			char op = popop();
 			if(op == '+'){
 				add();
@@ -88,7 +85,8 @@ public class rpn {
 	
 	
 	public rpn(){
-		counter = 0;
+		counter = -1;
+		opcounter = -1;
 		stk0 = new int[15];
 		stk1 = new char[15];
 	}
